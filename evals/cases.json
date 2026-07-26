@@ -1,0 +1,23 @@
+[
+  {
+    "name": "finds equipment allowance",
+    "document": "New full-time employees receive a one-time home-office equipment allowance of $1,200. The allowance covers a desk, chair, monitor, keyboard, mouse, webcam, or headset. Laptops are issued separately by IT. Unused funds expire after 90 days.",
+    "question": "What equipment can a new employee buy?",
+    "expectedTerms": ["allowance", "monitor", "keyboard"],
+    "shouldAnswer": true
+  },
+  {
+    "name": "abstains on missing vacation policy",
+    "document": "New full-time employees receive a one-time home-office allowance of $1,200. Laptops are issued separately by IT. Unused funds expire after 90 days.",
+    "question": "How many vacation days do employees receive?",
+    "expectedTerms": [],
+    "shouldAnswer": false
+  },
+  {
+    "name": "finds preapproval requirement",
+    "document": "Expense reports require itemized receipts. Purchases above $500 require written manager approval before purchase. Reports must be submitted within 45 days.",
+    "question": "When is manager approval required?",
+    "expectedTerms": ["approval", "500"],
+    "shouldAnswer": true
+  }
+]

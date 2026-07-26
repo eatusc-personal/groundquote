@@ -1,0 +1,46 @@
+type MarkProps = {
+  size?: number;
+  className?: string;
+};
+
+export function GroundquoteMark({ size = 30, className = "" }: MarkProps) {
+  return (
+    <svg
+      className={className}
+      width={size}
+      height={size}
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <rect width="40" height="40" rx="11" fill="#245A42" />
+      <path
+        d="M8.5 18.6C8.5 13.1 11.3 9.8 16.2 8.6L17.7 11.4C14.8 12.4 13.5 14 13.3 16.4H17.5V24.1H8.5V18.6Z"
+        fill="#D8EC73"
+      />
+      <path
+        d="M21.5 18.6C21.5 13.1 24.3 9.8 29.2 8.6L30.7 11.4C27.8 12.4 26.5 14 26.3 16.4H30.5V24.1H21.5V18.6Z"
+        fill="#D8EC73"
+      />
+      <path
+        d="M9 30.5H31"
+        stroke="#F8FAF5"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <circle cx="31" cy="30.5" r="2.5" fill="#D8EC73" />
+    </svg>
+  );
+}
+
+export function Wordmark() {
+  return (
+    <a className="wordmark" href="#" aria-label="Groundquote home">
+      <GroundquoteMark />
+      <span>
+        ground<span className="wordmark-accent">quote</span>
+      </span>
+    </a>
+  );
+}
