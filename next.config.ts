@@ -12,13 +12,16 @@ const contentSecurityPolicy = [
   "manifest-src 'self'",
   "media-src 'none'",
   "object-src 'none'",
-  "script-src 'self' 'unsafe-inline'",
+  `script-src 'self' 'unsafe-inline'${
+    process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""
+  }`,
   "style-src 'self' 'unsafe-inline'",
   "worker-src 'self' blob:",
   "upgrade-insecure-requests",
 ].join("; ");
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["127.0.0.1"],
   poweredByHeader: false,
   reactStrictMode: true,
   turbopack: {

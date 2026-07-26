@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <img src="https://groundquote.vercel.app/opengraph-image" alt="Groundquote — Ask the text. Check the source." width="820">
+  <img src="docs/demo/groundquote-demo.gif" alt="Groundquote loads a sample policy, answers a question, and connects the answer to its source passage" width="900">
 </p>
 
 Groundquote is a focused retrieval-augmented generation product for policies,
@@ -26,6 +26,16 @@ It is intentionally small enough to understand in one sitting and careful
 enough to use in the real world.
 
 **[Try Groundquote live →](https://groundquote.vercel.app)**
+
+## See the two paths
+
+The supported-answer path cites the passage it used. The safe path is just as
+important: when the document is silent, Groundquote says so and shows no
+pretend evidence.
+
+| Cited answer | Safe no-answer | Phone layout |
+| --- | --- | --- |
+| [![A Groundquote answer beside its source evidence](docs/screenshots/grounded-answer.png)](docs/screenshots/grounded-answer.png) | [![Groundquote safely declining an unsupported question](docs/screenshots/safe-no-answer.png)](docs/screenshots/safe-no-answer.png) | [![Groundquote on a phone](docs/screenshots/mobile.png)](docs/screenshots/mobile.png) |
 
 ## Why this exists
 
@@ -60,6 +70,7 @@ falls back to deterministic BM25 ranking if embeddings are unavailable.
 
 - Animated question → retrieval → citation trace
 - “RAG in 60 seconds” learning lab and abstention challenge
+- A longer [plain-English RAG guide](https://groundquote.vercel.app/learn/rag)
 - Text, Markdown, CSV, and JSON input
 - Clickable inline citations and visible evidence passages
 - Retrieval confidence, method, latency, and passage-count diagnostics
@@ -68,6 +79,8 @@ falls back to deterministic BM25 ranking if embeddings are unavailable.
 - Responsive UI, reduced-motion support, custom icon, and PWA manifest
 - Search metadata, sitemap, structured application and FAQ data
 - `llms.txt` and expanded machine-readable project context
+- Cookie-free, anonymized Vercel Web Analytics
+- Native sharing with a clipboard fallback
 
 ## Run locally
 
@@ -115,13 +128,26 @@ npm run lint
 npm run typecheck
 npm run test:run
 npm run eval
+npm run test:e2e
 npm run audit:prod
 npm run build
 ```
 
-The tests cover chunking, retrieval, abstention, and citation validation. The
-small evaluation set in [`evals/cases.json`](evals/cases.json) is designed to be
-easy to extend with real failure cases.
+Or run the complete release check:
+
+```bash
+npm run test:all
+```
+
+The current suite has 58 automated checks: 47 unit and API tests, 8 real-browser
+scenarios, and 3 retrieval evaluations. It covers chunking, ranking, duplicate
+evidence, citation validation, safe abstention, malformed requests, origin and
+payload limits, feedback behavior, mobile layout, keyboard navigation, WCAG A
+and AA checks, and public crawler files.
+
+Read the [full scenario matrix](docs/test-matrix.md). The small evaluation set
+in [`evals/cases.json`](evals/cases.json) is designed to grow whenever a real
+failure appears.
 
 ## Security and privacy
 
@@ -153,6 +179,8 @@ Groundquote publishes:
 - [`llms.txt`](public/llms.txt) and
   [`llms-full.txt`](public/llms-full.txt);
 - semantic, plain-language explanations visible in the rendered page.
+- a dedicated [RAG explainer](https://groundquote.vercel.app/learn/rag) with
+  `TechArticle` data.
 
 These files make the product easier for search engines and text-based agents to
 understand; they do not guarantee ranking or inclusion.
@@ -180,8 +208,8 @@ such as Vercel KV or Upstash Redis.
 
 ## Stack
 
-Next.js, TypeScript, OpenAI Responses API, OpenAI embeddings, Zod, Vitest, and
-optional Supabase feedback storage.
+Next.js, TypeScript, OpenAI Responses API, OpenAI embeddings, Zod, Vitest,
+Playwright, Axe, Vercel Web Analytics, and optional Supabase feedback storage.
 
 ## Contributing
 

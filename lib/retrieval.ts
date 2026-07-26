@@ -251,7 +251,7 @@ export function hasEnoughEvidence(
   if (evidence.length === 0) return false;
   const contentTerms = tokenize(question);
   const lexicalMatches = new Set(evidence.flatMap((item) => item.matchedTerms));
-  const minimumMatches = contentTerms.length >= 6 ? 2 : 1;
+  const minimumMatches = contentTerms.length >= 3 ? 2 : 1;
 
   if (lexicalMatches.size >= minimumMatches) return true;
   return semantic && evidence[0].score >= 0.9;

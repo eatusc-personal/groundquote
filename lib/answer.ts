@@ -45,18 +45,54 @@ export function extractiveAnswer(evidence: Evidence[]) {
   }
 
   const primary = evidence[0];
+  const primaryTerms = new Set(primary.matchedTerms);
   const secondary = evidence.find(
-    (item) => item.id !== primary.id && item.matchedTerms.length > 0,
+    (item) =>
+      item.id !== primary.id &&
+      item.matchedTerms.some((term) => !primaryTerms.has(term)),
   );
-  const shorten = (text: string) =>
-    text.length > 460 ? `${text.slice(0, 457).trimEnd()}…` : text;
+  const excerpt = (item: Evidence) => {
+    const sentences =
+      item.text.match(/[^.!?]+[.!?]+|[^.!?]+$/g)?.map((sentence) =>
+        sentence.trim(),
+      ) ?? [item.text];
+    const terms = new Set(item.matchedTerms.map((term) => term.toLowerCase()));
+    const ranked = sentences
+      .map((sentence, index) => ({
+        sentence,
+        index,
+        score: [...terms].filter((term) =>
+          sentence.toLowerCase().includes(term),
+        ).length,
+      }))
+      .filter((candidate) => candidate.score > 0)
+      .sort((left, right) => right.score - left.score || left.index - right.index)
+      .slice(0, 3)
+      .sort((left, right) => left.index - right.index)
+      .map((candidate) => candidate.sentence);
+    const selected = ranked.length > 0 ? ranked : sentences.slice(0, 2);
+    const complete: string[] = [];
+
+    for (const sentence of selected) {
+      const candidate = complete.length
+        ? `${complete.join(" ")} ${sentence}`
+        : sentence;
+      if (candidate.length > 460) break;
+      complete.push(sentence);
+    }
+
+    if (complete.length > 0) return complete.join(" ");
+    const shortened = selected[0].slice(0, 457);
+    const lastSpace = shortened.lastIndexOf(" ");
+    return `${shortened.slice(0, lastSpace > 300 ? lastSpace : 457).trimEnd()}…`;
+  };
   const parts = [
-    `The strongest relevant passage says: “${shorten(primary.text)}” [${primary.id}]`,
+    `The document says: “${excerpt(primary)}” [${primary.id}]`,
   ];
 
   if (secondary) {
     parts.push(
-      `A second relevant passage adds: “${shorten(secondary.text)}” [${secondary.id}]`,
+      `Another passage adds: “${excerpt(secondary)}” [${secondary.id}]`,
     );
   }
 

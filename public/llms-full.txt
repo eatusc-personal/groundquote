@@ -20,6 +20,9 @@ statement that the document does not contain enough information.
    evidence answer rather than inventing a result.
 7. Documents are request-scoped. Groundquote does not persist document text or
    questions in its application database.
+8. Retrieval failures become regression tests. The public suite covers
+   supported and unsupported questions, API boundaries, browser behavior,
+   accessibility, and mobile layout.
 
 ## Retrieval pipeline
 
@@ -46,3 +49,9 @@ store only an answer ID, helpful/not-helpful choice, answer mode, and timestamp.
 
 Groundquote is open source under the MIT license:
 https://github.com/eatusc/groundquote
+
+Plain-English RAG guide:
+https://groundquote.vercel.app/learn/rag
+
+Public test matrix:
+https://github.com/eatusc/groundquote/blob/main/docs/test-matrix.md

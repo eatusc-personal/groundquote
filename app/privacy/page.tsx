@@ -71,6 +71,11 @@ export default function PrivacyPage() {
             service operation. Groundquote uses an IP-derived key for
             rate-limiting but does not add IP addresses to its feedback table.
           </p>
+          <p>
+            The public site uses Vercel Web Analytics to understand basic usage.
+            Vercel reports those visits without cookies and does not expose an
+            individual visitor&apos;s identity to Groundquote.
+          </p>
         </section>
 
         <section>
