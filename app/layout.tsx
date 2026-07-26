@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import {
   DM_Sans,
   IBM_Plex_Mono,
@@ -81,68 +82,34 @@ export const metadata: Metadata = {
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebApplication",
-      "@id": `${siteUrl}/#application`,
-      name: "Groundquote",
-      url: siteUrl,
-      description:
-        "A free, open-source document question-answering application that returns citation-backed answers or safely says when the source is insufficient.",
-      applicationCategory: ["UtilitiesApplication", "EducationalApplication"],
-      operatingSystem: "Any modern web browser",
-      browserRequirements: "Requires JavaScript",
-      isAccessibleForFree: true,
-      offers: {
-        "@type": "Offer",
-        price: 0,
-        priceCurrency: "USD",
-      },
-      featureList: [
-        "Citation-backed document answers",
-        "Visible source passages",
-        "Safe no-answer behavior",
-        "Hybrid keyword and semantic retrieval",
-        "Interactive RAG learning guide",
-      ],
-      codeRepository: "https://github.com/eatusc/groundquote",
-      author: {
-        "@type": "Person",
-        name: "Eric Lai",
-        url: "https://github.com/eatusc",
-      },
-    },
-    {
-      "@type": "FAQPage",
-      "@id": `${siteUrl}/#faq`,
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "What is retrieval-augmented generation?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Retrieval-augmented generation, or RAG, finds relevant passages in a source before creating an answer. Groundquote keeps those passages visible so the answer can be checked.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "Does Groundquote store uploaded documents?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Groundquote processes document text for the current request and does not persist documents or questions in its application database. Generated mode sends the question and retrieved passages to the configured model provider.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "What happens when the answer is not in the document?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Groundquote returns an explicit not-enough-information response when retrieval cannot find sufficient supporting evidence.",
-          },
-        },
-      ],
-    },
+  "@type": "WebApplication",
+  "@id": `${siteUrl}/#application`,
+  name: "Groundquote",
+  url: siteUrl,
+  description:
+    "A free, open-source document question-answering application that returns citation-backed answers or safely says when the source is insufficient.",
+  applicationCategory: ["UtilitiesApplication", "EducationalApplication"],
+  operatingSystem: "Any modern web browser",
+  browserRequirements: "Requires JavaScript",
+  isAccessibleForFree: true,
+  offers: {
+    "@type": "Offer",
+    price: 0,
+    priceCurrency: "USD",
+  },
+  featureList: [
+    "Citation-backed document answers",
+    "Visible source passages",
+    "Safe no-answer behavior",
+    "Hybrid keyword and semantic retrieval",
+    "Interactive RAG learning guide",
   ],
+  codeRepository: "https://github.com/eatusc/groundquote",
+  author: {
+    "@type": "Person",
+    name: "Eric Lai",
+    url: "https://github.com/eatusc",
+  },
 };
 
 export default function RootLayout({
@@ -160,6 +127,7 @@ export default function RootLayout({
           }}
         />
         {children}
+        <Analytics />
       </body>
     </html>
   );

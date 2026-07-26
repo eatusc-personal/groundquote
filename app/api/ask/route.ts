@@ -179,10 +179,13 @@ export async function POST(request: Request) {
   }
 
   const fallback = extractiveAnswer(evidence);
+  const citedEvidence = evidence.filter((item) =>
+    fallback.citations.includes(item.id),
+  );
   const response: AskResponse = {
     answerId,
     ...fallback,
-    evidence,
+    evidence: citedEvidence,
     mode: "extractive",
     retrieval: {
       ...retrieval,

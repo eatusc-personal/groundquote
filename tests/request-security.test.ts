@@ -80,4 +80,30 @@ describe("request security", () => {
       )?.status,
     ).toBe(415);
   });
+
+  it("rejects malformed origins and impossible content lengths", async () => {
+    expect(
+      rejectUnsafeRequest(
+        request({
+          "content-type": "application/json",
+          "content-length": "-1",
+        }),
+        1_000,
+      )?.status,
+    ).toBe(413);
+
+    const response = rejectUnsafeRequest(
+      request({
+        "content-type": "application/json",
+        "content-length": "12",
+        origin: "not a url",
+      }),
+      1_000,
+    );
+
+    expect(response?.status).toBe(403);
+    await expect(response?.json()).resolves.toEqual({
+      error: "Invalid request origin.",
+    });
+  });
 });

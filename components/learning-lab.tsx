@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const lessons = [
   {
@@ -58,10 +59,13 @@ export function LearningLab() {
           <div className="section-kicker">RAG in about 60 seconds</div>
           <h2>Learn the recipe by using it.</h2>
         </div>
-        <p>
-          Retrieval-augmented generation is easier to understand when you can
-          see each decision. Groundquote keeps the important parts visible.
-        </p>
+        <div className="learning-intro-copy">
+          <p>
+            Retrieval-augmented generation is easier to understand when you can
+            see each decision. Groundquote keeps the important parts visible.
+          </p>
+          <Link href="/learn/rag">Read the plain-English RAG guide →</Link>
+        </div>
       </div>
 
       <div className="lesson-grid">

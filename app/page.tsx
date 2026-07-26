@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Wordmark } from "@/components/brand";
 import { GroundingAnimation } from "@/components/grounding-animation";
 import { LearningLab } from "@/components/learning-lab";
+import { ShareButton } from "@/components/share-button";
 import { TrustRail } from "@/components/trust-rail";
 import type { AskResponse, FeedbackRating } from "@/lib/types";
 
@@ -21,6 +22,37 @@ The allowance does not cover internet service, office decorations, personal tabl
 Employees who leave within six months may be asked to return equipment purchased with the allowance. Company-issued laptops must always be returned to IT.`;
 
 const MAX_DOCUMENT_CHARS = 60_000;
+
+const faqStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What is retrieval-augmented generation?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Retrieval-augmented generation, or RAG, finds relevant passages in a source before creating an answer. Groundquote keeps those passages visible so the answer can be checked.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Does Groundquote store uploaded documents?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Groundquote processes document text for the current request and does not persist documents or questions in its application database. Generated mode sends the question and retrieved passages to the configured model provider.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What happens when the answer is not in the document?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Groundquote returns an explicit not-enough-information response when retrieval cannot find sufficient supporting evidence.",
+      },
+    },
+  ],
+};
 
 function CitedAnswer({ answer }: { answer: string }) {
   const parts = answer.split(/(\[\d+\])/g);
@@ -175,6 +207,12 @@ export default function Home() {
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqStructuredData).replace(/</g, "\\u003c"),
+        }}
+      />
       <nav className="nav shell">
         <Wordmark />
         <div className="nav-links">
@@ -488,12 +526,17 @@ export default function Home() {
           <a href="https://github.com/eatusc/groundquote/issues/new/choose">
             Share an idea
           </a>
+          <ShareButton />
         </div>
       </section>
 
       <footer className="shell">
         <Wordmark />
-        <p>Documents are request-scoped and are not persisted by Groundquote.</p>
+        <p>
+          Built by{" "}
+          <a href="https://github.com/eatusc">Eric Lai</a>. Documents are not
+          persisted by Groundquote.
+        </p>
         <div className="footer-links">
           <Link href="/privacy">Privacy</Link>
           <a
