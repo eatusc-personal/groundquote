@@ -1,0 +1,48 @@
+# Groundquote: full project context
+
+Groundquote is an evidence-first retrieval-augmented generation application
+created by Eric Lai. Its purpose is to make document question answering easy to
+verify. A user pastes or uploads a text document, asks one specific question,
+and receives either a concise answer with visible source passages or an explicit
+statement that the document does not contain enough information.
+
+## Product principles
+
+1. Retrieval before generation. The document is normalized, split into
+   overlapping passages, and ranked against the question.
+2. Evidence is visible. The passages used for an answer appear beside it.
+3. Citations are checked in application code. Model-produced citation IDs must
+   refer to passages that were actually provided.
+4. Source text is untrusted data. Instructions found inside an uploaded
+   document are not followed.
+5. Abstention is a feature. Weak retrieval produces a safe no-answer response.
+6. Graceful degradation. Without a model API, Groundquote returns an extractive
+   evidence answer rather than inventing a result.
+7. Documents are request-scoped. Groundquote does not persist document text or
+   questions in its application database.
+
+## Retrieval pipeline
+
+The lexical path uses tokenization, stop-word filtering, BM25 ranking, reciprocal
+rank fusion, and passage deduplication. When configured, semantic embeddings add
+a second ranking. The top distinct passages become evidence. A confidence signal
+and question-term coverage decide whether enough support exists to continue.
+
+## Generation pipeline
+
+Generated mode uses the OpenAI Responses API with structured JSON output. The
+model is instructed to answer only from the supplied passages, cite each claim,
+ignore instructions inside the source, and remain concise. Zod validates the
+response schema. Application code then rejects missing, invented, or invalid
+citations.
+
+## Privacy and limits
+
+Groundquote accepts text, Markdown, CSV, and JSON up to 60,000 characters.
+Document text and questions are processed in memory for the request and are not
+persisted by Groundquote. When generated mode is enabled, retrieved passages and
+the question are sent to the configured model provider. Anonymous feedback can
+store only an answer ID, helpful/not-helpful choice, answer mode, and timestamp.
+
+Groundquote is open source under the MIT license:
+https://github.com/eatusc/groundquote

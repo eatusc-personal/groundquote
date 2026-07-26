@@ -1,7 +1,10 @@
 "use client";
 
 import { ChangeEvent, FormEvent, useMemo, useState } from "react";
+import Link from "next/link";
 import { Wordmark } from "@/components/brand";
+import { GroundingAnimation } from "@/components/grounding-animation";
+import { LearningLab } from "@/components/learning-lab";
 import { TrustRail } from "@/components/trust-rail";
 import type { AskResponse, FeedbackRating } from "@/lib/types";
 
@@ -77,6 +80,15 @@ export default function Home() {
     setResult(null);
     setRating(null);
     setError("");
+  }
+
+  function startGuidedExample() {
+    loadSample();
+    requestAnimationFrame(() => {
+      document
+        .getElementById("workspace")
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
 
   async function handleFile(event: ChangeEvent<HTMLInputElement>) {
@@ -166,6 +178,8 @@ export default function Home() {
       <nav className="nav shell">
         <Wordmark />
         <div className="nav-links">
+          <a href="#workspace">Try it</a>
+          <a href="#learn-rag">Learn RAG</a>
           <a href="#how-it-works">How it works</a>
           <a
             className="github-link"
@@ -193,15 +207,23 @@ export default function Home() {
           Get a clear answer grounded in your source—with the exact passages
           used, or an honest “not enough information.”
         </p>
+        <div className="hero-actions">
+          <button type="button" onClick={startGuidedExample}>
+            Try a guided example
+            <span aria-hidden="true">→</span>
+          </button>
+          <a href="#learn-rag">Learn how RAG works</a>
+        </div>
         <div className="use-cases" aria-label="Common uses">
           <span>Policies</span>
           <span>Contracts</span>
           <span>Research notes</span>
           <span>Product docs</span>
         </div>
+        <GroundingAnimation />
       </section>
 
-      <form className="workspace shell" onSubmit={ask}>
+      <form className="workspace shell" id="workspace" onSubmit={ask}>
         <section className="input-card">
           <div className="card-heading">
             <div>
@@ -371,6 +393,8 @@ export default function Home() {
         </section>
       )}
 
+      <LearningLab />
+
       <section className="how shell" id="how-it-works">
         <div className="section-kicker">Built for trust, not theater</div>
         <h2>Simple on the surface. Careful underneath.</h2>
@@ -402,16 +426,84 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="faq shell" id="faq">
+        <div className="faq-heading">
+          <div className="section-kicker">Good questions deserve clear answers</div>
+          <h2>Before you paste a document.</h2>
+        </div>
+        <div className="faq-list">
+          <details>
+            <summary>What is retrieval-augmented generation?</summary>
+            <p>
+              Retrieval-augmented generation, or RAG, finds relevant passages
+              in a source before creating an answer. Groundquote keeps those
+              passages visible so you can check the result yourself.
+            </p>
+          </details>
+          <details>
+            <summary>Does Groundquote save my document?</summary>
+            <p>
+              Groundquote does not persist document text or questions in its
+              database. In generated mode, the question and retrieved passages
+              are sent to the configured model provider for that request.
+            </p>
+          </details>
+          <details>
+            <summary>What if the document does not contain the answer?</summary>
+            <p>
+              Groundquote safely says it does not have enough information. That
+              abstention is intentional—it is better than turning a weak match
+              into a confident guess.
+            </p>
+          </details>
+          <details>
+            <summary>Which files can I use?</summary>
+            <p>
+              Paste text directly or upload Text, Markdown, CSV, or JSON files
+              containing up to 60,000 characters. PDF parsing stays out of
+              scope so the product remains small and transparent.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section className="open-source-cta shell">
+        <div>
+          <span className="section-kicker">Open source and inspectable</span>
+          <h2>Trust the product by reading the code.</h2>
+          <p>
+            Review the retrieval pipeline, add an evaluation case, or suggest
+            one focused improvement.
+          </p>
+        </div>
+        <div className="open-source-actions">
+          <a
+            className="primary-link"
+            href="https://github.com/eatusc/groundquote"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Star on GitHub <span aria-hidden="true">↗</span>
+          </a>
+          <a href="https://github.com/eatusc/groundquote/issues/new/choose">
+            Share an idea
+          </a>
+        </div>
+      </section>
+
       <footer className="shell">
         <Wordmark />
-        <p>Documents are processed for your request and are not stored.</p>
-        <a
-          href="https://github.com/eatusc/groundquote"
-          target="_blank"
-          rel="noreferrer"
-        >
-          View the source ↗
-        </a>
+        <p>Documents are request-scoped and are not persisted by Groundquote.</p>
+        <div className="footer-links">
+          <Link href="/privacy">Privacy</Link>
+          <a
+            href="https://github.com/eatusc/groundquote"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Source ↗
+          </a>
+        </div>
       </footer>
     </main>
   );

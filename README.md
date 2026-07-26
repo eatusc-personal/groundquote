@@ -2,9 +2,20 @@
   <img src="app/icon.svg" width="72" alt="Groundquote logo">
 </p>
 
-# Groundquote
+<h1 align="center">Groundquote</h1>
 
-**Ask the text. Check the source.**
+<p align="center"><strong>Ask the text. Check the source.</strong></p>
+
+<p align="center">
+  <a href="https://groundquote.vercel.app">Live app</a> ·
+  <a href="https://groundquote.vercel.app/#learn-rag">Learn RAG</a> ·
+  <a href="https://github.com/eatusc/groundquote/actions/workflows/ci.yml">CI</a> ·
+  <a href="LICENSE">MIT License</a>
+</p>
+
+<p align="center">
+  <img src="https://groundquote.vercel.app/opengraph-image" alt="Groundquote — Ask the text. Check the source." width="820">
+</p>
 
 Groundquote is a focused retrieval-augmented generation product for policies,
 contracts, research notes, and technical documentation. Paste or upload text,
@@ -14,6 +25,8 @@ When the document does not contain enough evidence, Groundquote says so.
 It is intentionally small enough to understand in one sitting and careful
 enough to use in the real world.
 
+**[Try Groundquote live →](https://groundquote.vercel.app)**
+
 ## Why this exists
 
 Many document-chat demos optimize for a fluent answer. Groundquote optimizes for a
@@ -22,7 +35,7 @@ Many document-chat demos optimize for a fluent answer. Groundquote optimizes for
 - Every generated claim must contain an inline source citation.
 - Citation IDs are validated by application code, not trusted from the model.
 - Weak retrieval takes a safe no-answer path.
-- Uploaded text is processed in request memory and is not persisted.
+- Uploaded text is processed for the request and is not persisted by the app.
 - Source text is treated as untrusted data to reduce prompt-injection risk.
 - A helpful / not-helpful control creates a lightweight human evaluation loop.
 - If the model API is unavailable, the product still returns transparent,
@@ -42,6 +55,19 @@ question → embedding → semantic ranking ─────────┘
 
 The semantic branch is enabled when `OPENAI_API_KEY` is configured. Retrieval
 falls back to deterministic BM25 ranking if embeddings are unavailable.
+
+## Public product features
+
+- Animated question → retrieval → citation trace
+- “RAG in 60 seconds” learning lab and abstention challenge
+- Text, Markdown, CSV, and JSON input
+- Clickable inline citations and visible evidence passages
+- Retrieval confidence, method, latency, and passage-count diagnostics
+- Safe no-answer behavior
+- Helpful / not-helpful feedback
+- Responsive UI, reduced-motion support, custom icon, and PWA manifest
+- Search metadata, sitemap, structured application and FAQ data
+- `llms.txt` and expanded machine-readable project context
 
 ## Run locally
 
@@ -66,6 +92,7 @@ retrieval.
 | `OPENAI_EMBEDDING_MODEL` | No | Defaults to `text-embedding-3-small` |
 | `SUPABASE_URL` | No | Enables aggregate anonymous feedback |
 | `SUPABASE_SERVICE_ROLE_KEY` | No | Server-only key for feedback writes |
+| `NEXT_PUBLIC_SITE_URL` | No | Canonical deployment URL |
 
 Never prefix the service-role key with `NEXT_PUBLIC_`.
 
@@ -88,12 +115,47 @@ npm run lint
 npm run typecheck
 npm run test:run
 npm run eval
+npm run audit:prod
 npm run build
 ```
 
 The tests cover chunking, retrieval, abstention, and citation validation. The
 small evaluation set in [`evals/cases.json`](evals/cases.json) is designed to be
 easy to extend with real failure cases.
+
+## Security and privacy
+
+- API credentials remain server-only.
+- Request content type, body size, origin, and schema are validated.
+- Public routes have request and payload limits.
+- Responses containing retrieval results use `Cache-Control: no-store`.
+- Source passages are labeled untrusted and cannot issue model instructions.
+- Generated citation IDs are validated against the retrieved evidence.
+- CSP, HSTS, frame restrictions, MIME protection, browser-permission limits,
+  and cross-origin isolation headers are enabled.
+- Document text and questions are not stored in the feedback table.
+
+Read the public [privacy explanation](https://groundquote.vercel.app/privacy)
+and [`SECURITY.md`](SECURITY.md). The hosted demo is not intended for secrets or
+regulated information.
+
+The included limiter is process-local and intentionally small. A high-traffic
+operator should add a distributed limiter and provider-level usage caps.
+
+## Search and AI discoverability
+
+Groundquote publishes:
+
+- canonical metadata and indexable crawler directives;
+- Open Graph and Twitter sharing images;
+- a generated XML sitemap and `robots.txt`;
+- `WebApplication` and `FAQPage` JSON-LD;
+- [`llms.txt`](public/llms.txt) and
+  [`llms-full.txt`](public/llms-full.txt);
+- semantic, plain-language explanations visible in the rendered page.
+
+These files make the product easier for search engines and text-based agents to
+understand; they do not guarantee ranking or inclusion.
 
 ## Deploy
 
@@ -120,6 +182,12 @@ such as Vercel KV or Upstash Redis.
 
 Next.js, TypeScript, OpenAI Responses API, OpenAI embeddings, Zod, Vitest, and
 optional Supabase feedback storage.
+
+## Contributing
+
+Focused issues and pull requests are welcome. Read
+[`CONTRIBUTING.md`](CONTRIBUTING.md) and never include sensitive document text
+in a bug report.
 
 ## License
 
