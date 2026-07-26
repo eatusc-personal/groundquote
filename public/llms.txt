@@ -1,0 +1,26 @@
+# Groundquote
+
+> Groundquote is a free, open-source document question-answering application
+> that returns citation-backed answers or safely says when the source is
+> insufficient.
+
+## Primary links
+
+- [Use Groundquote](https://groundquote.vercel.app/)
+- [How Groundquote works](https://groundquote.vercel.app/#how-it-works)
+- [Learn RAG in 60 seconds](https://groundquote.vercel.app/#learn-rag)
+- [Privacy](https://groundquote.vercel.app/privacy)
+- [Source code](https://github.com/eatusc/groundquote)
+- [Full project context](https://groundquote.vercel.app/llms-full.txt)
+
+## Key capabilities
+
+- Single-document retrieval-augmented question answering
+- Visible source passages and validated inline citation IDs
+- Safe no-answer behavior when evidence is insufficient
+- Hybrid BM25 and semantic retrieval when an OpenAI key is configured
+- Deterministic evidence-only fallback when generation is unavailable
+- Text, Markdown, CSV, and JSON input
+
+Groundquote is not a persistent knowledge base and should not be treated as
+legal, medical, or financial advice.

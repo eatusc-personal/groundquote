@@ -1,0 +1,17 @@
+name: Feature request
+description: Suggest a focused improvement
+title: "[Idea]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: What user problem would this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would a simple solution look like?
+    validations:
+      required: true

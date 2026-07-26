@@ -11,6 +11,11 @@ import {
 import { chunkDocument } from "@/lib/chunk";
 import { checkRateLimit } from "@/lib/rate-limit";
 import {
+  clientIp,
+  PRIVATE_RESPONSE_HEADERS,
+  rejectUnsafeRequest,
+} from "@/lib/request-security";
+import {
   hasEnoughEvidence,
   rankByBm25,
   rankByEmbedding,
@@ -22,11 +27,13 @@ import type { AskResponse } from "@/lib/types";
 export const runtime = "nodejs";
 export const maxDuration = 30;
 
-const RequestSchema = z.object({
-  documentName: z.string().trim().min(1).max(200).default("Document"),
-  documentText: z.string().trim().min(80).max(60_000),
-  question: z.string().trim().min(3).max(500),
-});
+const RequestSchema = z
+  .object({
+    documentName: z.string().trim().min(1).max(200).default("Document"),
+    documentText: z.string().trim().min(80).max(60_000),
+    question: z.string().trim().min(3).max(500),
+  })
+  .strict();
 
 const responseSchema = {
   type: "object",
@@ -42,23 +49,21 @@ const responseSchema = {
   required: ["answer", "citations", "sufficient"],
 };
 
-function clientIp(request: Request) {
-  return (
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-    request.headers.get("x-real-ip") ||
-    "local"
-  );
-}
-
 export async function POST(request: Request) {
   const startedAt = performance.now();
-  const limit = checkRateLimit(clientIp(request));
+  const unsafeRequest = rejectUnsafeRequest(request, 300_000);
+  if (unsafeRequest) return unsafeRequest;
+
+  const limit = checkRateLimit(`ask:${clientIp(request)}`);
   if (!limit.allowed) {
     return NextResponse.json(
       { error: "Too many requests. Please try again in a few minutes." },
       {
         status: 429,
-        headers: { "Retry-After": String(limit.retryAfterSeconds ?? 60) },
+        headers: {
+          ...PRIVATE_RESPONSE_HEADERS,
+          "Retry-After": String(limit.retryAfterSeconds ?? 60),
+        },
       },
     );
   }
@@ -69,7 +74,7 @@ export async function POST(request: Request) {
   } catch {
     return NextResponse.json(
       { error: "Please provide a document and a clear question." },
-      { status: 400 },
+      { status: 400, headers: PRIVATE_RESPONSE_HEADERS },
     );
   }
 
@@ -124,7 +129,7 @@ export async function POST(request: Request) {
         elapsedMs: Math.round(performance.now() - startedAt),
       },
     };
-    return NextResponse.json(response);
+    return NextResponse.json(response, { headers: PRIVATE_RESPONSE_HEADERS });
   }
 
   if (client) {
@@ -167,7 +172,7 @@ export async function POST(request: Request) {
           elapsedMs: Math.round(performance.now() - startedAt),
         },
       };
-      return NextResponse.json(response);
+      return NextResponse.json(response, { headers: PRIVATE_RESPONSE_HEADERS });
     } catch {
       // A cited extractive answer is safer than returning an unverified generation.
     }
@@ -184,5 +189,5 @@ export async function POST(request: Request) {
       elapsedMs: Math.round(performance.now() - startedAt),
     },
   };
-  return NextResponse.json(response);
+  return NextResponse.json(response, { headers: PRIVATE_RESPONSE_HEADERS });
 }

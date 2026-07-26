@@ -1,0 +1,36 @@
+name: Bug report
+description: Report a reproducible problem in Groundquote
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping make citation-backed answers more reliable. Do not include private documents, API keys, or other secrets.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the problem without pasting sensitive source text.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      placeholder: "1. Open…\n2. Paste a non-sensitive sample…\n3. Ask…"
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Answer mode
+      options:
+        - Evidence mode
+        - AI + retrieval
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device

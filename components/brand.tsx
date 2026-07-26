@@ -36,11 +36,12 @@ export function GroundquoteMark({ size = 30, className = "" }: MarkProps) {
 
 export function Wordmark() {
   return (
-    <a className="wordmark" href="#" aria-label="Groundquote home">
+    <Link className="wordmark" href="/" aria-label="Groundquote home">
       <GroundquoteMark />
       <span>
         ground<span className="wordmark-accent">quote</span>
       </span>
-    </a>
+    </Link>
   );
 }
+import Link from "next/link";
