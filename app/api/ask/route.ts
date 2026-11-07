@@ -27,6 +27,15 @@ import type { AskResponse } from "@/lib/types";
 export const runtime = "nodejs";
 export const maxDuration = 30;
 
+// Status and message only; never log request headers or the API key.
+function describeError(error: unknown) {
+  if (error && typeof error === "object") {
+    const e = error as { status?: number; code?: string; message?: string };
+    return { status: e.status, code: e.code, message: e.message?.slice(0, 300) };
+  }
+  return { message: String(error).slice(0, 300) };
+}
+
 const RequestSchema = z
   .object({
     documentName: z.string().trim().min(1).max(200).default("Document"),
@@ -97,8 +106,10 @@ export async function POST(request: Request) {
       const vectors = embeddings.data.map((item) => item.embedding);
       semanticRanking = rankByEmbedding(chunks, vectors[0], vectors.slice(1));
       semanticUsed = true;
-    } catch {
-      // Keyword retrieval remains available if the embedding service is unavailable.
+    } catch (error) {
+      // Keyword retrieval remains available if the embedding service is unavailable,
+      // but say so: a quiet fallback looks exactly like a healthy hybrid search.
+      console.error("[ask] embeddings failed, using keyword retrieval:", describeError(error));
     }
   }
 
@@ -173,8 +184,9 @@ export async function POST(request: Request) {
         },
       };
       return NextResponse.json(response, { headers: PRIVATE_RESPONSE_HEADERS });
-    } catch {
+    } catch (error) {
       // A cited extractive answer is safer than returning an unverified generation.
+      console.error("[ask] generation failed, using extractive answer:", describeError(error));
     }
   }
 
