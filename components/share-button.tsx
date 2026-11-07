@@ -9,7 +9,7 @@ export function ShareButton() {
 
   async function share() {
     const url = "https://groundquote.vercel.app";
-    const title = "Groundquote — answers you can trace";
+    const title = "Groundquote: answers you can trace";
     const text =
       "Ask a document and check every answer against the source. Groundquote is free and open source.";
 

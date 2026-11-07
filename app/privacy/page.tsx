@@ -24,7 +24,7 @@ export default function PrivacyPage() {
 
       <article className="legal-content shell">
         <div className="section-kicker">Plain-language privacy</div>
-        <h1>Your document is for your request—not our library.</h1>
+        <h1>Your document is for your request, not our library.</h1>
         <p className="legal-lede">
           Groundquote is designed as a request-scoped utility. It does not
           create user accounts, build document profiles, or persist your
@@ -45,8 +45,8 @@ export default function PrivacyPage() {
           <h2>Generated answers and model providers</h2>
           <p>
             When AI-generated mode is configured, Groundquote sends your
-            question and the retrieved passages—not a stored document
-            collection—to the configured model provider. That provider handles
+            question and the retrieved passages (not a stored document
+            collection) to the configured model provider. That provider handles
             the request under its own data and retention policies. Evidence-only
             mode does not make a generation request.
           </p>

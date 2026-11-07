@@ -30,11 +30,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: "Groundquote",
   title: {
-    default: "Groundquote — citation-backed document answers",
+    default: "Groundquote: citation-backed document answers",
     template: "%s | Groundquote",
   },
   description:
-    "Free, open-source RAG document Q&A. Ask a policy, contract, research note, or product document and get a concise answer with visible source evidence—or a safe no-answer.",
+    "Free, open-source RAG document Q&A. Ask a policy, contract, research note, or product document and get a concise answer with visible source evidence, or a safe no-answer.",
   keywords: [
     "RAG",
     "retrieval augmented generation",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Groundquote — citation-backed document answers",
+    title: "Groundquote: citation-backed document answers",
     description:
       "Ask the text. Check the source. Learn how evidence-first RAG works while you use it.",
     url: "/",
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Groundquote — answers you can trace",
+    title: "Groundquote: answers you can trace",
     description:
       "Free document Q&A with visible source evidence and a safe no-answer path.",
   },

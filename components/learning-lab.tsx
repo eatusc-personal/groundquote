@@ -120,7 +120,7 @@ export function LearningLab() {
             >
               {choice === "abstain"
                 ? "Exactly. The passage covers returns, not exchange fees."
-                : "That would be a guess—the source never mentions exchange fees."}
+                : "That would be a guess: the source never mentions exchange fees."}
             </div>
           )}
         </div>

@@ -242,7 +242,7 @@ export default function Home() {
           <span>Check the source.</span>
         </h1>
         <p className="hero-copy">
-          Get a clear answer grounded in your source—with the exact passages
+          Get a clear answer grounded in your source, with the exact passages
           used, or an honest “not enough information.”
         </p>
         <div className="hero-actions">
@@ -367,7 +367,7 @@ export default function Home() {
             </div>
 
             <div className="feedback-row">
-              <p>{rating ? "Thanks—that helps improve the product." : "Was this answer useful?"}</p>
+              <p>{rating ? "Thanks, that helps improve the product." : "Was this answer useful?"}</p>
               {!rating && (
                 <div className="rating-buttons">
                   <button
@@ -490,7 +490,7 @@ export default function Home() {
             <summary>What if the document does not contain the answer?</summary>
             <p>
               Groundquote safely says it does not have enough information. That
-              abstention is intentional—it is better than turning a weak match
+              abstention is intentional: it is better than turning a weak match
               into a confident guess.
             </p>
           </details>
