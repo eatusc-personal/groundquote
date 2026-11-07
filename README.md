@@ -93,14 +93,16 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000). The app works immediately
-in evidence-only mode. Add `OPENAI_API_KEY` for generated answers and hybrid
+in evidence-only mode. Add `ANTHROPIC_API_KEY` for Claude-written answers and `OPENAI_API_KEY` for hybrid
 retrieval.
 
 ## Environment variables
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `OPENAI_API_KEY` | No | Enables embeddings and synthesized answers |
+| `ANTHROPIC_API_KEY` | No | Claude writes the cited answers |
+| `ANTHROPIC_MODEL` | No | Defaults to `claude-opus-5-5` |
+| `OPENAI_API_KEY` | No | Enables embeddings; writes answers when no Anthropic key is set |
 | `OPENAI_MODEL` | No | Defaults to `gpt-5.6-luna` |
 | `OPENAI_EMBEDDING_MODEL` | No | Defaults to `text-embedding-3-small` |
 | `SUPABASE_URL` | No | Enables aggregate anonymous feedback |
@@ -190,7 +192,7 @@ understand; they do not guarantee ranking or inclusion.
 The fastest path is Vercel:
 
 1. Import this GitHub repository into Vercel.
-2. Add `OPENAI_API_KEY` as an encrypted environment variable.
+2. Add `ANTHROPIC_API_KEY` and `OPENAI_API_KEY` as encrypted environment variables.
 3. Add a monthly API usage limit and deploy.
 4. Optionally configure Supabase feedback using the steps above.
 
@@ -208,7 +210,7 @@ such as Vercel KV or Upstash Redis.
 
 ## Stack
 
-Next.js, TypeScript, OpenAI Responses API, OpenAI embeddings, Zod, Vitest,
+Next.js, TypeScript, Claude API (structured outputs), OpenAI embeddings, Zod, Vitest,
 Playwright, Axe, Vercel Web Analytics, and optional Supabase feedback storage.
 
 ## Contributing

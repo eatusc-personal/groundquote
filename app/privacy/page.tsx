@@ -44,11 +44,13 @@ export default function PrivacyPage() {
         <section>
           <h2>Generated answers and model providers</h2>
           <p>
-            When AI-generated mode is configured, Groundquote sends your
-            question and the retrieved passages (not a stored document
-            collection) to the configured model provider. That provider handles
-            the request under its own data and retention policies. Evidence-only
-            mode does not make a generation request.
+            When AI mode is configured, two providers process each request.
+            OpenAI receives the document text and your question to compute
+            embeddings for retrieval. Anthropic (Claude) receives your question
+            and the retrieved passages to write the cited answer. Neither
+            receives a stored document collection, and each handles the request
+            under its own data and retention policies. Evidence-only mode makes
+            no provider requests.
           </p>
         </section>
 
@@ -105,7 +107,7 @@ export default function PrivacyPage() {
           </div>
         </section>
 
-        <p className="legal-updated">Last updated July 26, 2026.</p>
+        <p className="legal-updated">Last updated November 7, 2026.</p>
       </article>
     </main>
   );
