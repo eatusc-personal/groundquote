@@ -3,7 +3,7 @@
 ## Reporting a vulnerability
 
 Please do not open a public issue for a suspected vulnerability. Use
-[GitHub private vulnerability reporting](https://github.com/eatusc/groundquote/security/advisories/new)
+[GitHub private vulnerability reporting](https://github.com/eatusc-personal/groundquote/security/advisories/new)
 and include:
 
 - the affected route or component;

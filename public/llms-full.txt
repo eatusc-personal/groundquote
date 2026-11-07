@@ -48,10 +48,10 @@ the question are sent to the configured model provider. Anonymous feedback can
 store only an answer ID, helpful/not-helpful choice, answer mode, and timestamp.
 
 Groundquote is open source under the MIT license:
-https://github.com/eatusc/groundquote
+https://github.com/eatusc-personal/groundquote
 
 Plain-English RAG guide:
 https://groundquote.vercel.app/learn/rag
 
 Public test matrix:
-https://github.com/eatusc/groundquote/blob/main/docs/test-matrix.md
+https://github.com/eatusc-personal/groundquote/blob/main/docs/test-matrix.md

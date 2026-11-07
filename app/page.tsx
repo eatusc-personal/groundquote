@@ -221,7 +221,7 @@ export default function Home() {
           <a href="#how-it-works">How it works</a>
           <a
             className="github-link"
-            href="https://github.com/eatusc/groundquote"
+            href="https://github.com/eatusc-personal/groundquote"
             target="_blank"
             rel="noreferrer"
           >
@@ -517,13 +517,13 @@ export default function Home() {
         <div className="open-source-actions">
           <a
             className="primary-link"
-            href="https://github.com/eatusc/groundquote"
+            href="https://github.com/eatusc-personal/groundquote"
             target="_blank"
             rel="noreferrer"
           >
             Star on GitHub <span aria-hidden="true">↗</span>
           </a>
-          <a href="https://github.com/eatusc/groundquote/issues/new/choose">
+          <a href="https://github.com/eatusc-personal/groundquote/issues/new/choose">
             Share an idea
           </a>
           <ShareButton />
@@ -540,7 +540,7 @@ export default function Home() {
         <div className="footer-links">
           <Link href="/privacy">Privacy</Link>
           <a
-            href="https://github.com/eatusc/groundquote"
+            href="https://github.com/eatusc-personal/groundquote"
             target="_blank"
             rel="noreferrer"
           >

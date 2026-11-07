@@ -104,7 +104,7 @@ const structuredData = {
     "Hybrid keyword and semantic retrieval",
     "Interactive RAG learning guide",
   ],
-  codeRepository: "https://github.com/eatusc/groundquote",
+  codeRepository: "https://github.com/eatusc-personal/groundquote",
   author: {
     "@type": "Person",
     name: "Eric Lai",

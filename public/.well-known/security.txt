@@ -1,5 +1,5 @@
-Contact: https://github.com/eatusc/groundquote/security/advisories/new
+Contact: https://github.com/eatusc-personal/groundquote/security/advisories/new
 Expires: 2027-07-26T00:00:00.000Z
 Preferred-Languages: en
 Canonical: https://groundquote.vercel.app/.well-known/security.txt
-Policy: https://github.com/eatusc/groundquote/blob/main/SECURITY.md
+Policy: https://github.com/eatusc-personal/groundquote/blob/main/SECURITY.md

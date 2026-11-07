@@ -11,7 +11,7 @@
 - [Learn RAG in 60 seconds](https://groundquote.vercel.app/#learn-rag)
 - [Plain-English RAG guide](https://groundquote.vercel.app/learn/rag)
 - [Privacy](https://groundquote.vercel.app/privacy)
-- [Source code](https://github.com/eatusc/groundquote)
+- [Source code](https://github.com/eatusc-personal/groundquote)
 - [Full project context](https://groundquote.vercel.app/llms-full.txt)
 
 ## Key capabilities

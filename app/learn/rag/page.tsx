@@ -244,7 +244,7 @@ export default function RagGuidePage() {
                 <Link className="primary-link" href="/#workspace">
                   Try Groundquote <span aria-hidden="true">→</span>
                 </Link>
-                <a href="https://github.com/eatusc/groundquote">
+                <a href="https://github.com/eatusc-personal/groundquote">
                   Read the source ↗
                 </a>
               </div>

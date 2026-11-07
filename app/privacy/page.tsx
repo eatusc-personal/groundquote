@@ -96,10 +96,10 @@ export default function PrivacyPage() {
             privately through the project&apos;s security advisory form.
           </p>
           <div className="legal-actions">
-            <a href="https://github.com/eatusc/groundquote/issues">
+            <a href="https://github.com/eatusc-personal/groundquote/issues">
               Project issues ↗
             </a>
-            <a href="https://github.com/eatusc/groundquote/security/advisories/new">
+            <a href="https://github.com/eatusc-personal/groundquote/security/advisories/new">
               Private security report ↗
             </a>
           </div>

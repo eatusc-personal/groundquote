@@ -9,7 +9,7 @@
 <p align="center">
   <a href="https://groundquote.vercel.app">Live app</a> ·
   <a href="https://groundquote.vercel.app/#learn-rag">Learn RAG</a> ·
-  <a href="https://github.com/eatusc/groundquote/actions/workflows/ci.yml">CI</a> ·
+  <a href="https://github.com/eatusc-personal/groundquote/actions/workflows/ci.yml">CI</a> ·
   <a href="LICENSE">MIT License</a>
 </p>
 
