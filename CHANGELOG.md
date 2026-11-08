@@ -2,6 +2,17 @@
 
 Groundquote follows semantic versioning for public releases.
 
+## 2026-11-07
+
+- Answers are now written by Claude (structured JSON output, same schema and
+  citation validation as before) when `ANTHROPIC_API_KEY` is set. OpenAI stays
+  as the fallback writer and remains the embedding provider. A refusal or error
+  still falls back to the cited extractive answer.
+- The privacy page names both providers and states that embeddings send the
+  document text to OpenAI.
+- `/api/ask` now logs why an answer fell back (provider, status, code), so a
+  broken key or model no longer looks like a working demo.
+
 ## 1.2.0 — 2026-07-26
 
 - Added a practical RAG guide covering retrieval misses, unsupported details,
