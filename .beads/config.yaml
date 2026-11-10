@@ -76,3 +76,4 @@
 dolt:
   host: 127.0.0.1
   port: 9342
+  auto-start: false  # never spawn a local dolt server when 9342 is down (2026-11-10)
