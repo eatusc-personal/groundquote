@@ -8,6 +8,11 @@ on:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    # Browsers and their system libraries come prebuilt in this image, so CI
+    # never needs apt. Keep the tag equal to @playwright/test in package-lock.json.
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.0-resolute
+      options: --user 1001
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v6
@@ -15,7 +20,9 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      # No-op when the image tag matches the lockfile; otherwise downloads the
+      # browser from Playwright's CDN (not apt).
+      - run: npx playwright install chromium
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run test:run
