@@ -9,9 +9,9 @@ bd is the shared backlog for Eric, Ben and their agents (one Dolt server on the 
 
 ## Practices (Eric's, for every repo)
 - **File only actionable work.** Every issue needs a next action. Questions go to a person (owner label, or `human`), not into the backlog as tasks. Do not copy other people's to-dos from logs.
-- **Every issue has an owner, two ways:** an assignee (`"Eric Lai"`, `Ben`, or a client such as `Daniel`) and the matching label (`eric`, `ben`, `client`). Unsure? Best guess plus label `owner-guess`. `bd list --no-assignee` must stay empty.
+- **Every issue has an owner, two ways:** an assignee (`"Eric Lai"`, `Ben`, or a client contact) and the matching label (`eric`, `ben`, `client`). Unsure? Best guess plus label `owner-guess`. `bd list --no-assignee` must stay empty.
 - **Identity:** Eric's sessions run as `BEADS_ACTOR="Eric Lai"`, Ben's as `BEADS_ACTOR="Ben"` (set in each person's ~/.zshenv). The actor must match the assignee to claim or close, so only claim and close issues assigned to the person you work for.
-- **Decisions go to the repo's lead with the `human` label:** Ben in repos he leads (family-tv), Eric everywhere else. They answer with `bd human respond <id>`. Never decide for them and close it.
+- **Decisions go to the repo's lead with the `human` label:** Ben in repos he leads, Eric everywhere else. They answer with `bd human respond <id>`. Never decide for them and close it.
 - **Describe when filing:** why it matters, where (file:line, job, log path), and how to tell it is done.
 - **Claim before working** (`bd update <id> --claim`) so two sessions never take the same issue. In Herdr, the planner names one issue id per fork; the fork claims it and closes it or files follow-ups before it ends.
 - **Close with evidence:** `bd close <id> --reason "<commit, log line, or decision>"`. No evidence: leave it open and say what you checked. Unsure if done or obsolete: ask instead of closing.
