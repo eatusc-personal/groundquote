@@ -22,8 +22,9 @@ contracts, research notes, and technical documentation. Paste or upload text,
 ask one question, and get a short answer backed by the exact source passages.
 When the document does not contain enough evidence, Groundquote says so.
 
-It is intentionally small enough to understand in one sitting and careful
-enough to use in the real world.
+It is a public demo, deliberately small enough to understand in one sitting,
+built with the checks a real deployment needs: citation validation, safe
+abstention, request limits, and a test suite that covers all of them.
 
 **[Try Groundquote live →](https://groundquote.vercel.app)**
 
@@ -66,7 +67,7 @@ question → embedding → semantic ranking ─────────┘
 The semantic branch is enabled when `OPENAI_API_KEY` is configured. Retrieval
 falls back to deterministic BM25 ranking if embeddings are unavailable.
 
-## Public product features
+## Features
 
 - Animated question → retrieval → citation trace
 - “RAG in 60 seconds” learning lab and abstention challenge
@@ -141,7 +142,7 @@ Or run the complete release check:
 npm run test:all
 ```
 
-The current suite has 58 automated checks: 47 unit and API tests, 8 real-browser
+The current suite has 61 automated checks: 50 unit and API tests, 8 real-browser
 scenarios, and 3 retrieval evaluations. It covers chunking, ranking, duplicate
 evidence, citation validation, safe abstention, malformed requests, origin and
 payload limits, feedback behavior, mobile layout, keyboard navigation, WCAG A
